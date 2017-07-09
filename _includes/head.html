@@ -1,0 +1,19 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    {% if page.meta %}<meta name="description" content="{{ page.meta }}">{% endif %}
+    <meta name="description" content="{{ site.description }}">
+    {% if site.google_verify %}<meta name="google-site-verification" content="{{ site.google_verify }}">{% endif %}
+
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="shortcut icon" type="image/png" href="{{ '/assets/favicon.png' | prepend: site.baseurl }}"/>
+    <link rel="stylesheet" href="{{ '/assets/main.css' | prepend: site.baseurl }}">
+
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ TeX: { extensions: ["autoload-all.js"] }});</script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
