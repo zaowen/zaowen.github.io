@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Think Again! Project Euler 92"
-date: 2016-07-17 00:00:00 -0600
+date: 2017-07-17 00:00:00 -0600
 categories: ProjectEuler
 ---
 Let a function $$C(n)$$ be defined as adding the square of the digits in $$n$$ to form a new number. Prove that all integers through repeated application of $$C(n)$$ equal 1 or 89.
