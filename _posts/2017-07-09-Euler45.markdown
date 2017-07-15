@@ -2,7 +2,7 @@
 layout: post
 title:  "Shapely Numbers: Project Euler 45"
 date:   2017-07-09 01:39:01 -0600
-categories: Project Euler
+categories: ProjectEuler
 ---
 
 One of the more semi-interesting things I've found about Project Euler is the odd spikes in difficulty. When doing problems sequentially is can be hard to determine at a glance whether the next problem will even be comperable to the one prior. That being said [problem 45][Problem] is not one of these peaks.

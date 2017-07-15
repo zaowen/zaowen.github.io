@@ -1,0 +1,160 @@
+---
+layout: post
+title:  "Disjoin the Forest for the Tree: Project Euler 92"
+date: 2017-07-16 00:00:00 -0600
+categories: ProjectEuler
+---
+
+In general, computer science problems are not [hard](https://en.wikipedia.org/wiki/NP-hardness), or at least the strict mechanics of the mathematics behind solving computer science problems tend to be [simple](https://en.wikipedia.org/wiki/Simple_(abstract_algebra) ). The larger problem tends to be just that, large problems.
+Adding a new value to an ordered list is easy, adding a new value to an ordered list that must remain in order and has a few million data points on either side of the inserted one is hard. Making change for a dollar is easy, printing the number of diffrent ways you can make change for $100.00 is hard. In both of these cases ( and in many more ) the solution is being smart about the way you organize your data.
+
+<hr>
+A number chain is created by continuously adding the square of the digits in a number to form a new number until it has been seen before.
+
+For example,
+
+44 → 32 → 13 → 10 → <b>1 → 1</b>
+
+85 →<b> 89</b> → 145 → 42 → 20 → 4 → 16 → 37 → 58 → <b>89</b>
+
+Therefore any chain that arrives at 1 or 89 will become stuck in an endless loop. What is most amazing is that EVERY starting number will eventually arrive at 1 or 89.
+
+How many starting numbers below ten million will arrive at 89?
+<hr>
+
+As with our last [problem]({{page.previous.url}}) relatively quick solutions exist that do not require much thought, and again like the last problem the optimizations are just interesting enought to warrent a second blog post.  The naive approach would look something along the lines of this... 
+
+```c++
+#define MILL 10000001
+
+int cycle( int in ){
+
+	if( in == 1 || in == 89){
+		return in;
+	}
+
+	int arr[15] = {};
+	int out = 0;
+
+	seperate( in , arr);
+
+	for( int i =0; i < 8; i++){
+		out += arr[i] * arr[i];
+	}
+
+	return cycle(out);
+}
+
+int main(){
+	unsigned int total = 0;
+
+	for( int i = 2; i < MILL; i++){
+		if( 89 == cycle(i) ){
+			total++;
+		}
+	}
+
+	printf( "%u\n" , total );
+}
+```
+
+This finishes pretty fast, around 7 seconds, but we can do much better, by employing some useful data structures from Disjoint Sets. Disjoint-Sets are a data structure that allow for quickly being able put items into categories and decern which category they were placed into. Since we know from the problem statement that all numbers fall into one of two sets, ( the 1 set or the 89 set).
+
+The idea behind a disjoint set is that if we decide that an element in the set is the end all be all item from which all other items shall follow in it's example we can dub it the representatve of the group.  Then if we want elements that can be related we <b>Union</b> the two elements together making both the elements point to the same representative.  Then after we have placed all the elements in the category they belong we can tell if 2 elements are in the same category by <b>Find</b>ing both element's representative.
+
+And those bold words in the last paragraph weren't because this blog lacks an editor. <b>Union</b> and <b>Find</b> are the two typical operations that can be performed on a Disjoint set. Normally there exists a problem where many elements can be strung together making the find operation slow, however two optimizations called <b>Union by Rank</b> and <b>Path Compression</b> speed up the finds from $$\mathcal{O}(n)$$ to [hillariously small](https://en.wikipedia.org/wiki/Ackermann_function#Inverse).
+
+Now that we have established a 'rigorious' mathematical basis, we will now precede to gut Disjoin Set for all they're worth and repurpose the bits as a cheap memoization scheme.
+
+The one thing to keep in mind while we're deconstructing Disjoint Sets is that eventually we will need to know every element's representative.
+
+```c++
+	int * garr;
+	garr = (int*)malloc( MILL * sizeof( int ) );
+	memset( garr, 0 , MILL * sizeof( int ) );
+```
+
+Since we need access to every element in the set easily,a dynamicly allocated array works pretty well. We're going to end up page faulting like crazy but the path compresssion will more than make up for the loss.  Also dynamic arrays works better than global ones for reasons
+
+```c++
+	garr[1] = 1;
+	garr[89] = 89;
+```
+
+Set some known values. This way we have a quick check to see if we are done by checking to see if the location we are going to is not equal to zero. This is where we gain the most speed up in effecently using the structure at hand. 
+
+```c++
+	seperate( in , arr, 8);
+
+	for( int i =0; i < 8; i++){
+		out += arr[i] * arr[i];
+	}
+```
+
+Getting the next value is pretty standard, seperate() comes from a library of useful Euler functions I've made that puts each of the digits of a number into an array.
+
+```c++
+	garr[in] = cycle( garr,  out );
+	return garr[in];
+```
+
+Here is where the path compression comes into effect, instead of returning the next value in the sequence it is more efficent to set each value in the sequcnce to the whatever its final value ends up being  { 1 , 89 }. This saves a ton of computation, especially since on average each path has a length of 7 before hitting 1 or 89.( I counted ) The memoized version has an average path length of 1. ( This by the way is a perfect example of the diffrence between $$\mathcal{O}(n)$$ and $$\mathcal{O}(n\log{n})$$.)
+
+This is exactally what we expect with path compression and why it is so powerful.  In a more standard Disjoint Set implementation paths are only compressed when an element is searched for. This has the advantage of comperable <b>Find</b> times without having to compress the entire set. However since the problem requires a <b>Find</b> on every element it is easier to just compress as you go.
+
+<hr>
+<br>
+
+Adding a Disjoint Set to this problem give a huge increase in speed lowering the time it took to run on my [lappy](https://www.google.com/search?q=some+fujitsu+thing) from 7.046s to 1.426s which fits unusually well with the calculated speed increase.  While this optimization does take advantage of Disjoint set ideas this is more of a memoization than a solution that takes advantage of Disjoint Sets. And it is likely I will address a more apt problem in the future.
+
+My Solution:
+
+```c++
+#include <stdio.h>
+#include "PElib.h"
+
+#define MILL 10000001
+
+int cycle( int* garr,  int in ){
+
+	if( garr[in] != 0){
+		return garr[in];
+	}
+
+	int arr[15] = {};
+	int out = 0;
+
+	seperate( in , arr, 15);
+
+	for( int i =0; i < 15; i++){
+		out += arr[i] * arr[i];
+	}
+
+	garr[in] = cycle( garr,  out );
+	return garr[in];
+}
+
+int main( int argc, char * argv[] ){
+	int w;
+	unsigned int total = 0;
+	int * garr;
+	garr = (int*)malloc( MILL * sizeof( int ) );
+	memset( garr, 0 , MILL * sizeof( int ) );
+
+	garr[1] = 1;
+	garr[89] = 89;
+
+	for( int i = 2; i < MILL; i++){
+		cycle( garr, i);
+	}
+
+	for( int i = 2; i < MILL; i++){
+		if( garr[i] == 89 )
+			total++;
+	}
+
+	printf( "%u\n" , total );
+}
+```
+
+[NPH]:https://en.wikipedia.org/wiki/NP-hardness

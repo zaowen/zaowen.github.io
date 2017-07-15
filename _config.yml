@@ -11,6 +11,7 @@ github_username:  zaowen
 markdown: kramdown
 #input:  GFM
 theme: minima
+permalink: pretty
 plugins:
   - jekyll-feed
 
