@@ -7,12 +7,6 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  zaowen
 
-analytics:
-    provider: google
-    google:
-        tracking_id: 'UA-102559983-1'
-safe: true
-
 # Build settings
 markdown: kramdown
 #input:  GFM
