@@ -4,15 +4,6 @@ title: About
 permalink: /about/
 ---
 
-dicks This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+My name is Zach, I'm a Computer Science student at [South Dakota School of Mines and Technology](https://www.sdsmt.edu/). I like computers, tea and vim keybindings.
 
-You can find the source code for Minima at GitHub:
-[jekyll][Wiki1] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+I've always been of the opinion that, to an outside observer, the difference between knowledge I cannot articulate and knowledge I do not have is essentially null. As such, the purpose of this blog is to articulate the things I know and am learning. I hope at least one other person finds something here informative.
