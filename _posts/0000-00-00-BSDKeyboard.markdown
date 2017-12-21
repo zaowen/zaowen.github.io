@@ -2,7 +2,7 @@
 layout: post
 title: "Of Mice,( and Keyboards) and MAN(1)"
 date: 2017-08-13 00:00:00 -0600
-categories:
+categories: [linux, BSD]
 ---
 ```
 I write code for a living, and by that I mean if it weren't for Stack Exchange I'd be homeless. 
