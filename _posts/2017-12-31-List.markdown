@@ -1,0 +1,89 @@
+---
+layout: post
+title: "< insert company name here> can suck it: An Interview Question"
+date: 2017-12-01 00:00:00 -0600
+categories: [algorithms, data structures]
+---
+
+In life, I find that I have about two reason for doing things. 
+Either I find the topic interesting or I'm driven by spite.
+This is one of those topics, my friend recently was being interviewed by a software company. 
+During this interview process he was given the following problem: Remove $$n$$ random elements from a list.
+Seems simple right? WRONG!
+I've found that commonly, the point of these exercises is not to find an answer to the problem, but instead come up with the exact same solution the recruiter came up with.
+
+In pursuit of this, a common tactic of the recruiter is to come up with some provision to the problem every time you come up with a solution.
+In this case, the oft repeated problem was the system random function had a bad tendency to return the same number over and over again.
+In a naive solution this has the tendency to create a linear problem similar to bad hash functions into a hash table.
+After wresting with the interviewer for an hour, the intended solution was revealed to be to replace the removed element with the tail element.
+I think this solution is stupid and exactly why Engineers think most CS graduates are trash.
+
+The given solution was $$ \mathbb{O}(n) $$ so my solution will also need to be at least linear.
+We would also prefer that the choice of elements be as fair as possible.
+This means the first element should have a $$\frac{m}{n}$$ chance of removal. 
+$$n$$ being the total number of elements and $$m$$ being the number of elements to remove.
+
+The key to this issue is how we view each step of the problem.
+Instead of viewing the problem as a whole from each step it is advantageous to instead only consider the remainder of the list.
+To be specific, if the first element has a $$\frac{m}{n}$$ chance of being removed, then what chance should the next element have of removal?
+It depends... but there are two choices
+* It is not removed, in this case the number of elements to remove remains the same but there are fewer of them, so the probability should increase to $$\frac{m}{n-1}$$
+* If it is removed the same as the above is true however the numerator also should be decremented since fewer elements should be removed from the remainder of the list. The resulting probability is $$\frac{m-1}{n-1}$$.
+
+This kind of relation can be easily represented by the following recursive code:
+``` c++
+remove( list<> it, int n, int m){
+   if( m <= 0 )
+      return;
+
+   float p = (rand() % n)/float(n); // roll a probablility
+
+   if( p < float(m)/float(n) ) 
+   {
+      it = arr.erase(it);
+      m--;
+   }
+   else
+   {
+      it++;
+   }
+
+   return remove( it, n-1, m );
+}
+```
+
+Or the following iterative code:
+
+```c++
+int i; // elements processed
+int r; // removed elements
+auto it = arr.begin();
+while( m > r )
+{
+   p = (rand() % n)/float(n); // roll a probablility
+
+   // check against curren chance
+   if( p < float(m-r)/float(n-i) ) 
+   {
+      it = arr.erase(it);
+      r++;
+   }
+   else
+   {
+      it++;
+   }
+   i++;
+}
+```
+
+The recursive version has a chance of failing on large on large lists dues to segmentation faults if tail recursion is not used.
+By the way Tail Recursion is super cool and we'll talk about it soon.
+
+What could the recruiter say to make this solution invalid? 
+A semi-valid complaint would be that this version processes the entire list more often than it does not especially on $$\frac{m}{n}$$ values very close to 0 or 1. 
+Though this could be corrected by adapting the code to pick elements for a new list instead of deleting them.
+Another complaint may be that depending on the architecture divisions may be more expensive than swaps though that's a bit of a stretch.
+
+More important than any given solution or the interview itself, I think it's important to be able to adapt to arbitrary constraints when formulating a software solution.
+Speaking from my own personal experience sometimes situations as stupid as the one described above happen and if your first instinct requires a major refactor [you're going to have a bad time](https://youtu.be/ynxPshq8ERo).
+

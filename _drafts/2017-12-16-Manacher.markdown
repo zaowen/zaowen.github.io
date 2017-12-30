@@ -1,0 +1,87 @@
+---
+layout: post
+title:  "If it's worth doin' it's worth doing only once."
+date: 2017-12-16 00:00:00 -0600
+categories: [Algorithms, Strings]
+---
+
+The biggest problem with computers is they are just as stupid as the programmers. The problem with programmers is they incapable of knowing how stupid they are. And the stupidest thing a you can make a computer can do is waste time. In general, avoiding this problem is called dynamic programming or memoization. While this sort of technique will stop the computer from being stupid, you cannot stop the programmer from trying to solve stupid problems. Like for example the Longest palindromic substring problem.
+
+<hr>
+
+Say for example you're a weird person who wants to know all of their strings backwards and forwards. And you've decided the best way to do this is to find the longest palindromic substring in all of your strings ( since palindromes are the same backwards and forwards). Since palindromes can start anywhere and be even or odd length you'll have to check all of them. Here is some simple recursive code to do so.
+
+
+```C++
+int pal( int L, int R, char * str )
+{
+   //Don't fall off left
+   if( L < 0 )
+   {
+      return 0;
+   }
+
+   //Don't fall off right
+   if( str[R] == '\0' )
+   {
+      return 0;
+   }
+
+   //Check equality
+   if( str[L] == str[R] )
+   {
+      return pal( L -1, R + 1, str ) + 1;
+   }
+   else
+   {
+      return 0;
+   }
+
+}
+
+int oddPal( int n , char * str )
+{
+   return (2 * pal( n -1, n + 1 ,str) ) + 1;
+}
+
+int evenPal( int n , char * str )
+{
+   return 2 * pal( n, n + 1 ,str);
+}
+```
+
+This works fairly well however it conveniently comes equipped with the problem we are trying to solve. In order for this code to return the correct answer both evenpal() and oddpal() must be called on every character making this algorithm $$O(n^2)$$. This sucks. But is it necessary?
+
+Lets look for overlapping subproblems, times when we're having to redetermine things that could be inferred from previous information more quickly. Imagine you have a number of overlapping palindromes. Ignore trivial cases like "bb" overlapping "abba".
+
+Say we have a palindrome with two smaller palindromes centered on the left and right of the first. Like this:
+
+```
+ |vv| |vv|
+EaaaacaaaaE
+|----^----|
+```
+
+We can observe that no matter what weird combination of letters exist on the left side, so long as the left palindrome does not contain the left most character there has to exist another on the right side of the same length.
+
+Next lets look at what happens if it does contain the left most character:
+
+```
+ |-vv-| |vv|
+ aaaaaacaaaa
+   |---^---|
+```
+
+The interesting thing about this case, is that so long as the center of the left palindrome is not on the left most character, the distance from the centers of the left and right 
+
+Finally it could be the case that we gain no additional information from this sub-palindromic analysis.
+
+```
+|---v---|
+dcbaEabcdCdcbaE
+    |----^----|
+```
+
+So how can these oberservations help us?
+
+

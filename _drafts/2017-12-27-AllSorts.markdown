@@ -1,0 +1,75 @@
+---
+layout: post
+title:  "It Doesn't Take All Sorts"
+date: 2017-12-27 00:00:00 -0600
+categories: [Algorithms, Sorts]
+---
+
+```
+Computer Science, actually that's a terrible way to start, first of all its not a science,
+         it might be engineering or it might be art. Its also not very much about computers.
+         -Harold Abelson
+```
+
+For some reason or another, a common starting place for computer science education is sorting algorithms.
+Everyone has to learn them, but before getting to the [fun](https://en.wikipedia.org/wiki/Sorting_algorithm#Efficient_sorts) sorts, it is common to teach the $$O(n^2)$$ ones.
+The Three being Insertion Sort,
+```c++
+for( int i = 1; i < arr.size(); i++ )
+{
+   j = i;
+   while( j > 0 )
+   {
+      if( arr[j] > arr[j-1] )
+      {
+         swap(arr[k], arr[k-1]);
+      }
+      j--;
+   }
+}
+``` 
+Selection Sort, 
+```c++
+for( int i = 1; i < arr.size(); i++ )
+{
+   int mindex = i;
+
+   for( int j = i+1; j < arr.size(); j++ )
+   {
+      if( arr[j] > arr[mindex] )
+      {
+         mindex = j
+      }
+   }
+
+   if( mindex != i )
+   {
+      swap(arr[k], arr[k-1]);
+   }
+}
+```
+and Bubble sort.
+```c++
+for( int i = 0; i < arr.size(); i++ )
+{
+   for( int j = i; j < arr.size(); i++ )
+      if( arr[j] > arr[j-1] )
+      {
+         swap(arr[k], arr[k-1]);
+      }
+}
+```
+
+But what if I told you there were not three diffrent sorts here, but instead a single mechanism with 3 diffrent ways of approaching it?
+
+Imagine if you will a node that takes in two inputs and returns two outputs,
+
+<img class="centered" style="background-color: gray; border-radius: 25px; padding: 20px" src="{{ "/assets/posts/sorts/node.svg" | prepend: site.baseurl }}" alt="The Sorting Machine">
+
+with output 1 less than output 2.
+It is easy to see that given any two inputs what this node will return is a sorted list of two elements.
+
+<img class="centered" style="background-color: gray; border-radius: 25px; padding: 20px" src="{{ "/assets/posts/sorts/machine.svg" | prepend: site.baseurl }}" alt="The Sorting Machine">
+
+
+

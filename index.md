@@ -51,7 +51,7 @@ layout: default
 
 <td>
 <div class="home">
-<h1 id="post_page" style="margin-bottom: 30px; font-size: 20pt; border-bottom: solid 1px #e8e8e8">Posts</h1>
+<h1 id="post_page" style="margin-bottom: 30px; font-size: 20pt; border-bottom: solid 1px #e8e8e8">Recent Posts</h1>
    <ul class="posts">
         {% for post in site.posts limit:8 %}
             <li>
