@@ -2,7 +2,7 @@
 layout: post
 title: "< insert company name here> can suck it: An Interview Question"
 date: 2017-12-31 00:00:00 -0600
-categories: [algorithms, data structures]
+categories: [algorithms, data_structures]
 ---
 
 In life, I find that I have about two reason for doing things. 
