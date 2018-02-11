@@ -1,15 +1,12 @@
 ---
 layout: post
 title:  "It Doesn't Take All Sorts"
-date: 2017-12-27 00:00:00 -0600
+date: 2011-2-18 00:00:00 -0600
 categories: [Algorithms, Sorts]
 ---
 
-```
-Computer Science, actually that's a terrible way to start, first of all its not a science,
-         it might be engineering or it might be art. Its also not very much about computers.
-         -Harold Abelson
-```
+>Computer Science, actually that's a terrible way to start, first of all its not a science,
+> it might be engineering or it might be art. Its also not very much about computers -Harold Abelson
 
 For some reason or another, a common starting place for computer science education is sorting algorithms.
 Everyone has to learn them, but before getting to the [fun](https://en.wikipedia.org/wiki/Sorting_algorithm#Efficient_sorts) sorts, it is common to teach the $$O(n^2)$$ ones.
@@ -67,9 +64,39 @@ Imagine if you will a node that takes in two inputs and returns two outputs,
 <img class="centered" style="background-color: gray; border-radius: 25px; padding: 20px" src="{{ "/assets/posts/sorts/node.svg" | prepend: site.baseurl }}" alt="The Sorting Machine">
 
 with output 1 less than output 2.
-It is easy to see that given any two inputs what this node will return is a sorted list of two elements.
+We can think of this node as a simple machine that sorts two numbers.
+It is also possible to connect these nodes into a network in such a way as to sort any number of numbers.
 
 <img class="centered" style="background-color: gray; border-radius: 25px; padding: 20px" src="{{ "/assets/posts/sorts/machine.svg" | prepend: site.baseurl }}" alt="The Sorting Machine">
 
+It is easy to see that this collection of nodes provides a sorted list, since after node $$A$$ has activated the inputs to nodes $$B_0$$ and $$B_1$$ will be a sorted list containing of the first two $$i$$'s.
+This will continue until the output of the $$O$$ vector.
 
+Now, even though the output of each sorting algorithm is a sorted list, depending on our interpretation of the network we find any one of the individual algorithms.
 
+Take the list of numbers: 54321. Sorting with a Selection sort
+
+$$\begin{array} {|r|r}
+543\underline{21} & \\
+54\underline{31}2 & \\
+5\underline{41}32 & \\
+\underline{51}432 & \\
+{\bf 1}54\underline{32} & \\
+{\bf 1}5\underline{42}3 & \\
+{\bf 1}\underline{52}43 & \\
+{\bf 12}5\underline{43} & \\
+{\bf 12}\underline{53}4 & \\
+{\bf 123}\underline{45} & \\
+{\bf 12345} & \\
+\end{array}$$
+
+This is all well and good but we can see similar behaviour from our machine if the nodes are evaluated horizontally with the first smallest subscripts first the network performs a Selection sort.
+
+$$\begin{array} {|r|r}
+{\bf 1}5432 & n_0 \\
+{\bf 12}543 & n_1\\
+{\bf 123}54 & n_2 \\
+{\bf 12345} & n_3\\
+\end{array}$$
+
+However.
