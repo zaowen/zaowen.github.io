@@ -1,6 +1,8 @@
 \documentclass[tikz]{standalone}
 
-\usetikzlibrary{arrows, shapes, positioning}
+\usetikzlibrary{arrows, shapes, positioning,calc}
+
+\definecolor{grey}{RGB}{80,80,80}
 
 \begin{document}
     \begin{tikzpicture}[scale=4, >=stealth, node distance=2cm, shorten >=1pt, shorten <=1pt, minimum size=0.6cm, very thick]
@@ -24,11 +26,24 @@
 
         \node[rectangle, draw, right of=D2] (D3) {$D_3$};
 
+         %useless nodes
+        \node[rectangle, draw, right of=A,fill=grey] (A1) {$a_1$};
+        \node[rectangle, draw, right of=A1,fill=grey] (A2) {$a_2$};
+        \node[rectangle, draw, right of=B1,fill=grey] (B2) {$b_2$};
+        \node[rectangle, draw, right of=A2,fill=grey] (A3) {$a_3$};
+        \node[rectangle, draw, right of=B2,fill=grey] (B3) {$b_3$};
+        \node[rectangle, draw, right of=C2,fill=grey] (C3) {$c_3$};
+
         \node[below of=D] (o0) {$o_0$};
         \node[below of=D1] (o1) {$o_1$};
         \node[below of=D2] (o2) {$o_2$};
         \node[below of=D3] (o3) {$o_3$};
         \node[right of=o3] (o4) {$o_4$};
+
+         %bubble nodes
+        \node[right of=A3] (o02) {$o_0$};
+        \node[right of=B3] (o12) {$o_1$};
+        \node[right of=C3] (o22) {$o_2$};
 
          %Draw horizontal Arrows
         \draw[->] (i0.east) -| (A.north);
@@ -37,16 +52,19 @@
         \draw[->] (i3.east) -- (C.west);
         \draw[->] (i4.east) -- (D.west);
 
-        \draw[->] (A.east) -| (B1.north);
+        \draw[->] (A.east) -- (A1.west);
         \draw[->] (B.east) -- (B1.west);
         \draw[->] (C.east) -- (C1.west);
         \draw[->] (D.east) -- (D1.west);
 
-        \draw[->] (B1.east) -| (C2.north);
+        \draw[->] (A1.east) -- (A2.west);
+        \draw[->] (B1.east) -- (B2.west);
         \draw[->] (C1.east) -- (C2.west);
         \draw[->] (D1.east) -- (D2.west);
 
-        \draw[->] (C2.east) -| (D3.north);
+        \draw[->] (A2.east) -- (A3.west);
+        \draw[->] (B2.east) -- (B3.west);
+        \draw[->] (C2.east) -- (C3.west);
         \draw[->] (D2.east) -- (D3.west);
 
         % Draw Vertical Arrows
@@ -54,16 +72,32 @@
         \draw[->] (B.south) -- (C.north);
         \draw[->] (C.south) -- (D.north);
 
+        \draw[->] (A1.south) -- (B1.north);
         \draw[->] (B1.south) -- (C1.north);
         \draw[->] (C1.south) -- (D1.north);
 
+        \draw[->] (A2.south) -- (B2.north);
+        \draw[->] (B2.south) -- (C2.north);
         \draw[->] (C2.south) -- (D2.north);
+
+        \draw[->] (A3.south) -- (B3.north);
+        \draw[->] (B3.south) -- (C3.north);
+        \draw[->] (C3.south) -- (D3.north);
 
         \draw[->] ( D.south) -- (o0.north);
         \draw[->] (D1.south) -- (o1.north);
         \draw[->] (D2.south) -- (o2.north);
         \draw[->] (D3.south) -- (o3.north);
         \draw[->] ( D3.east) -| (o4.north);
+
+        \draw[->] (A3.east) -- (o02.west);
+        \draw[->] (B3.east) -- (o12.west);
+        \draw[->] (C3.east) -- (o22.west);
+
+
+        \draw[->] (o0.east) .. controls ($ (o0)+ (.5, 0) $) and ($ (A1) + (-.5,.75) $) .. (A1.north);
+        \draw[->] (o1.east) .. controls ($ (o1)+ (.5, 0) $) and ($ (A2) + (-.5,.75) $) .. (A2.north);
+        \draw[->] (o2.east) .. controls ($ (o2)+ (.5, 0) $) and ($ (A3) + (-.5,.75) $) .. (A3.north);
 
     \end{tikzpicture}
 \end{document}
