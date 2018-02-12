@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "It Doesn't Take All Sorts"
-date: 2017-2-18 00:00:00 -0600
+date: 2018-2-18 00:00:00 -0600
 categories: [Algorithms, Sorts]
 ---
 
