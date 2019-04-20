@@ -4,17 +4,19 @@
   {% include head.html %}
 
   <body>
-
+    <div class="site">
     {% include header.html %}
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </main>
+    {% include navigation.html %}
+	<div class="page-container">
+	  <main class="page-content" aria-label="Content">
+		{{ content }}
+	  </main>
+	</div>
 
     {% include footer.html %}
-    {% include analytics.html %}
+    </div>
   </body>
 
+    {% include analytics.html %}
+  <link rel="stylesheet" href="/assets/css/styles.css">
 </html>

@@ -1,0 +1,104 @@
+$link-color: rgb(40, 110, 220);
+$page-bkgnd: #222;
+$bar-black: #111;
+$nav-gray: #666;
+
+body, html {
+	background: $page-bkgnd;
+	color: #ccc;
+}
+
+a {
+	color: $link-color;
+	text-decoration:none;
+}
+
+.active {
+	color: $link-color !important;
+}
+
+.wrapper {
+	padding:0 20px;
+}
+
+.site {
+	margin: 40px auto;
+	width: 1280px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.site-header {
+	background-color: $bar-black;
+	color: #999;
+	padding: 0px 10px;
+	height: auto;
+
+	a {
+		font-size: 40px;
+	}
+}
+
+.site-header:after {
+	content: " ";
+	display: block;
+	clear: both;
+
+}
+
+.nav-bar {
+	width: 100%;
+	border-color: blue;
+	border: 2px solid $bar-black;
+	background-color: $nav-gray;
+}
+
+.nav-list {
+	width: 100%;
+	list-style: none;
+
+	li {
+		background-color: inherit;
+		float: left;
+		display: block;
+	}
+
+	a {
+		padding: 20px 20px;
+		color: #fff;
+	}
+
+}
+.nav-bar:after {
+	clear: both;
+}
+
+.nav-list:after {
+	content: " ";
+	display: block;
+	clear: both;
+
+}
+
+.site-footer {
+	background-color: $bar-black;
+	color: #999;
+	padding: 20px 0;
+}
+
+.face {
+	width: 100px;
+	padding: 10px;
+	float: left;
+}
+
+.page-container {
+	padding: 20px;
+	background: #444;
+}
+.page-content {
+	float: none;
+	width: 850px;
+	margin: 0 auto;
+	background: #444;
+
+}

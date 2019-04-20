@@ -12,7 +12,7 @@ youtube_username:  zaowen
 markdown: kramdown
 #input:  GFM
 
-theme: minima
+# theme: minima
 permalink: pretty
 plugins:
   - jekyll-feed
