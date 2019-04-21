@@ -1,7 +1,8 @@
 $link-color: rgb(40, 110, 220);
 $page-bkgnd: #222;
 $bar-black: #111;
-$nav-gray: #666;
+$nav-gray: #444;
+$content-gray: #333;
 
 body, html {
 	background: $page-bkgnd;
@@ -66,6 +67,9 @@ a {
 		padding: 20px 20px;
 		color: #fff;
 	}
+	a:hover:not(.active) {
+		background-color: $bar-black;
+	}
 
 }
 .nav-bar:after {
@@ -93,12 +97,12 @@ a {
 
 .page-container {
 	padding: 20px;
-	background: #444;
+	background: $content-gray;
 }
 .page-content {
 	float: none;
 	width: 850px;
 	margin: 0 auto;
-	background: #444;
+	background: $content-gray;
 
 }

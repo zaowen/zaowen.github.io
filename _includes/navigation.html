@@ -1,9 +1,9 @@
 <nav class="nav-bar">
 	<ul class="nav-list">
-	  <li><a {% if page.url == "/" %} class="active"{% endif %} href="/">Home</a></li>
-	  <li><a {% if page.url == "/portfolio/" %} class="active"{% endif %} href="/portfolio/">Portfolio</a></li>
-	  <li><a {% if page.url == "/blog/" %} class="active"{% endif %} href="/blog/">Blog</a></li>
-	  <li><a {% if page.url == "/resume/" %} class="active"{% endif %} href="/resume/">Resume</a></li>
-	  <li><a {% if page.url == "/contact/" %} class="active"{% endif %} href="/contact/">Contact</a></li>
+	  <li><a {% if page.url == "/" %} class="active" {% else %} href="/" {% endif %}>Home</a></li>
+	  <li><a {% if page.url == "/portfolio/" %} class="active" {% else %} href="/portfolio/"{% endif %}>Portfolio</a></li>
+	  <li><a {% if page.url == "/blog/" %} class="active"{% else %} href="/blog/"{% endif %}>Blog</a></li>
+	  <li><a {% if page.url == "/resume/" %} class="active"{% else %} href="/resume/"{% endif %}>Resume</a></li>
+	  <li><a {% if page.url == "/contact/" %} class="active"{% else %} href="/contact/"{% endif %}>Contact</a></li>
 	</ul>
 </nav>
