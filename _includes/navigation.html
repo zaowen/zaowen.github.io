@@ -1,9 +1,18 @@
-<nav class="nav-bar">
-	<ul class="nav-list">
-	  <li><a {% if page.url == "/" %} class="active" {% else %} href="/" {% endif %}>Home</a></li>
-	  <li><a {% if page.url == "/portfolio/" %} class="active" {% else %} href="/portfolio/"{% endif %}>Portfolio</a></li>
-	  <li><a {% if page.url == "/blog/" %} class="active"{% else %} href="/blog/"{% endif %}>Blog</a></li>
-	  <li><a {% if page.url == "/resume/" %} class="active"{% else %} href="/resume/"{% endif %}>Resume</a></li>
-	  <li><a {% if page.url == "/contact/" %} class="active"{% else %} href="/contact/"{% endif %}>Contact</a></li>
-	</ul>
+<nav class="nav-bar" id="topNav">
+	  <a {% if page.url == "/" %} class="active" {% else %} href="/" {% endif %}>Home</a>
+	  <a {% if page.url == "/portfolio/" %} class="active" {% else %} href="/portfolio/"{% endif %}>Portfolio</a>
+	  <a {% if page.url == "/blog/" %} class="active"{% else %} href="/blog/"{% endif %}>Blog</a>
+	  <a {% if page.url == "/resume/" %} class="active"{% else %} href="/resume/"{% endif %}>Resume</a>
+	  <a {% if page.url == "/contact/" %} class="active"{% else %} href="/contact/"{% endif %}>Contact</a>
+	<a class="icon" onClick=navChange()>&#9776</a>
+	<script>
+	  function navChange() {
+		  var x = document.getElementById("topNav");
+		  if (x.className === "nav-bar") {
+			  x.className += " responsive";
+		  } else {
+			  x.className = "nav-bar";
+		  }
+	  }
+	  </script>
 </nav>
