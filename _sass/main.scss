@@ -19,7 +19,14 @@ a {
 }
 
 .wrapper {
-	padding:0 20px;
+	padding: 0 20px;
+}
+
+.name-title {
+	padding-top: 25px;
+	p {
+		margin: 0;
+	}
 }
 
 .site {
@@ -33,10 +40,15 @@ a {
 	color: #999;
 	padding: 0px 10px;
 	height: auto;
+	vertical-align: middle;
 
 	a {
 		font-size: 40px;
 	}
+	.wrapper  {
+		margin: 0;
+	}
+
 }
 
 .site-header:after {
@@ -83,6 +95,29 @@ a {
 	content: " ";
 	display: block;
 	clear: both;
+}
+
+.site-footer {
+	background-color: $bar-black;
+	color: #999;
+	padding: 20px 0;
+}
+
+.face {
+	width: 100px;
+	padding: 10px;
+	float: left;
+}
+
+.page-container {
+	padding: 20px;
+	background: $content-gray;
+}
+.page-content {
+	float: none;
+	width: 80%;
+	margin: 0 auto;
+	background: $content-gray;
 
 }
 
@@ -90,13 +125,25 @@ a {
 	.site {
 		width: 740px;
 	}
+
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 767px ) {
 	.site {
-		width: 500px;
+		width: 660px;
 	}
+}
 
+@media screen and (max-width: 700px ) {
+	.site {
+		width: 560px;
+	}
+	.site-header a {
+		font-size: 30px;
+	}
+	.name-title {
+		padding-top: 30px;
+	}
 	.nav-bar a {
 		display: none;
 	}
@@ -124,30 +171,46 @@ a {
 		right: 0;
 		top: 0;
 	}
-
-
 }
 
-.site-footer {
-	background-color: $bar-black;
-	color: #999;
-	padding: 20px 0;
+@media screen and (max-width: 600px ) {
+	.site {
+		width: 520px;
+	}
+	.site-header {
+		text-align: center;
+	}
+	.name-title {
+		padding-top: 0px;
+	}
+	.face {
+		padding: 0;
+		padding-top: 10px;
+		float: none;
+	}
 }
 
-.face {
-	width: 100px;
-	padding: 10px;
-	float: left;
+@media screen and (max-width: 540px ) {
+	.site {
+		width: 460px;
+	}
 }
 
-.page-container {
-	padding: 20px;
-	background: $content-gray;
+@media screen and (max-width: 480px ) {
+	.site {
+		width: 380px;
+	}
 }
-.page-content {
-	float: none;
-	width: 80%;
-	margin: 0 auto;
-	background: $content-gray;
 
+@media screen and (max-width: 400px ) {
+	.site {
+		width: 320px;
+	}
+
+	.face {
+		width: 80px;
+	}
+	.site-header a {
+		font-size: 30px;
+	}
 }
