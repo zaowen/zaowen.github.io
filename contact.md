@@ -3,7 +3,7 @@ layout: default
 title: Contact
 permalink: /contact/
 ---
-<a href="mailto:zacharyowen@acm.org?Subject=Site%20Mail"><img width="48" src="/assets/mail.png"></a>
+<a href="mailto:zach@zacharyowen.xyz?Subject=Site%20Mail"><img width="48" src="/assets/mail.png"></a>
 <a href="https://www.linkedin.com/in/zachary-owen-515731148/"><img width="48" src="/assets/linkedin.png"></a>
 
 Stack Overflow:
